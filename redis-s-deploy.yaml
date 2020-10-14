@@ -16,6 +16,10 @@ spec:
         role: slave
         tier: backend
     spec:
+      volumes:
+      - name: pvc2
+        persistentVolumeClaim:
+          claimName: pvc2
       containers:
       - name: slave
         image: gcr.io/google_samples/gb-redisslave:v1
@@ -28,3 +32,6 @@ spec:
           value: dns
         ports:
         - containerPort: 6379
+        volumeMounts:
+        - mountPath: "/data"
+          name: pvc2
